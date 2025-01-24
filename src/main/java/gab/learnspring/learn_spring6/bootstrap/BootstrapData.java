@@ -72,27 +72,29 @@ public class BootstrapData implements CommandLineRunner {
         ddd.setPublisher(savedPublisher);
         noEJB.setPublisher(savedPublisher);
 
-
         /*
-         * Saving everything in repositories
+         * Saving everything in their own repositories
          *
          */
         Author ericSaved = authorRepository.save(eric);
-        Book dddSaved = bookRepository.save(ddd);
-
         Author johnSaved = authorRepository.save(john);
-
         Author rodSaved = authorRepository.save(rod);
+
+        Book dddSaved = bookRepository.save(ddd);
         Book noEJBSaved = bookRepository.save(noEJB);
 
 
         /*
-        * Relating/Adding the books to their respective authors
+        * Relating/Adding the books to their respective authors and doing the reverse
         *
         * */
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
         johnSaved.getBooks().add(noEJBSaved);
+        dddSaved.getAuthors().add(ericSaved);
+        noEJBSaved.getAuthors().add(rodSaved);
+        noEJBSaved.getAuthors().add(johnSaved);
+
 
 
         /*
@@ -102,6 +104,8 @@ public class BootstrapData implements CommandLineRunner {
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
         authorRepository.save(johnSaved);
+        bookRepository.save(dddSaved);
+        bookRepository.save(noEJBSaved);
 
         /*
          * Showing some info
