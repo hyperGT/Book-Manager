@@ -5,5 +5,4 @@ import gab.learnspring.learn_spring6.domain.Book;
 public interface BookService {
 
     Iterable<Book> findAll();
-
 }
